@@ -1,0 +1,59 @@
+syntax = "proto3";
+
+option go_package = "pkg/api";
+
+package wallet_proto;
+
+import "google/api/annotations.proto";
+
+service Wallets{
+    rpc CreateWallet(CreateWalletRequest) returns (CreateWalletResponse){
+        option (google.api.http) = {
+            post: "/v1/CreateWallet"
+            body: "*"
+        };
+    }
+    rpc GetBalance(GetBalanceRequest) returns (GetBalanceResponse){
+        option (google.api.http) = {
+            post: "/v1/GetBalance"
+            body: "*"
+        };
+    }
+    rpc UpdateBalance(UpdateBalaceRequest) returns (UpdateBalaceResponse){
+        option (google.api.http) = {
+            post: "/v1/UpdateBalance"
+            body: "*"
+        };
+    }
+};
+
+message Wallet_Balance{
+    int64 balance = 1;
+}
+
+message CreateWalletRequest{
+    string id = 1;
+    int64 balance = 2;
+}
+
+message CreateWalletResponse{
+    string id = 1;
+    Wallet_Balance balance = 2; 
+}
+
+message GetBalanceRequest{
+    string id = 1;
+}
+
+message GetBalanceResponse{
+    Wallet_Balance balance = 1; 
+}
+
+message UpdateBalaceRequest{
+    string id = 1;
+    int64 balance = 2;
+}
+
+message UpdateBalaceResponse{
+    Wallet_Balance balance = 1; 
+}
